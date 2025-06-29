@@ -39,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             } catch (error) {
                 res.status(500).json({
                     success: false,
-                    message: "Failed to update    task",
+                    message: "Failed to update task",
                     error: error instanceof Error ? error.message : "Unknown error"
                 });
             }
