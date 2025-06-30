@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 
 import { Task } from "@/types/task";
 import Modal from "./Modal";
@@ -16,11 +17,18 @@ const TaskCard =({task}: TaskCardProps) => {
         const confirmed = confirm("Are you sure you want to delete this task?");
         if(!confirmed) return;
         try {
-            await fetch(`api/tasks/${task._id}`,{method: "DELETE",});
+           const res = await fetch(`api/tasks/${task._id}`,{method: "DELETE",});
+           
+           if (res.ok) {
+            toast.success("Task deleted");
             window.location.reload();
+           } else {
+            toast.error("Failed to delete task");
+           }
 
         } catch (error) {
             console.error("Error deleting task", error);
+            toast.error("An unexpected error occurred")
         }
     }
 

@@ -1,5 +1,6 @@
 "use client";
 import React,{useState} from 'react';
+import toast from 'react-hot-toast';
 
 const TaskForm = () => {
     const [title,setTitle] = useState("");
@@ -21,13 +22,16 @@ const TaskForm = () => {
             });
             
             if(res.ok) {
+                toast.success("Task created successfully👍")
                 // Refresh thet page (SSR behaviour)
                 window.location.reload();
             } else {
-                alert("Failed to add task");
+                toast.error("Failed to add task 😭");
+
             }
         } catch (error) {
             console.error("Error adding task", error);
+            toast.error("Failed to add task 😭")
         } finally {
             setIsSubmitting(false);
         }

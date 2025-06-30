@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import {Task, TaskStatus}  from "@/types/task";
+import toast from 'react-hot-toast';
 
 interface Props {
     task: Task;
@@ -24,10 +25,14 @@ const EditTaskForm = ({task, onClose}: Props) => {
             });
     
             if (res.ok) {
+                toast.success("Task updated successfully😂");
                 window.location.reload(); // SSR refresh
+            } else {
+                toast.error("Failed to  update task😭")
             }
         } catch (error) {
-            console.error("Error updating task: ",error)
+            console.error("Error updating task: ",error);
+            toast.error("An unexpected error occurred")
         } finally {
             setIsSubmitting(false);
           }
