@@ -3,8 +3,12 @@ import { Task } from '@/types/task';
 import TaskCard from '@/components/TaskCard';
 import TaskForm from '@/components/TaskForm';
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "";
 async function getTasks(): Promise<Task[]> {
-    const res = await fetch ("http://localhost:3000/api/tasks", {
+//     const res = await fetch ("http://localhost:3000/api/tasks", {
+//         cache: 'no-store', // Ensures fresh data on each request)
+// })
+    const res = await fetch (`${baseUrl}/api/tasks`, {
         cache: 'no-store', // Ensures fresh data on each request)
 })
     if(!res.ok) {
